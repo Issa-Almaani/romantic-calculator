@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>صفحة الحب</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f06, #ff9a9e);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 40px;
+      text-shadow: 0 0 10px #fff6f6;
+    }
+    .heart {
+      width: 150px;
+      height: 150px;
+      background: #e84393;
+      position: relative;
+      transform: rotate(-45deg);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 20px #e84393;
+      margin-bottom: 30px;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      background: #e84393;
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-shadow: 0 0 20px #e84393;
+      transition: background 0.3s;
+    }
+    .heart::before {
+      top: -75px;
+      left: 0;
+    }
+    .heart::after {
+      top: 0;
+      left: 75px;
+    }
+    .heart.enlarged {
+      transform: rotate(-45deg) scale(1.5);
+      box-shadow: 0 0 40px #ff007f;
+      background: #ff007f;
+    }
+    .heart.enlarged::before,
+    .heart.enlarged::after {
+      background: #ff007f;
+      box-shadow: 0 0 40px #ff007f;
+    }
+    #message {
+      font-size: 2em;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      color: #fff;
+    }
+    #message.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <h1>صفحة الحب الرومانسية</h1>
+  <div class="heart" id="heart"></div>
+  <div id="message">أحبك يا بانا ❤️</div>
+
+  <script>
+    const heart = document.getElementById('heart');
+    const message = document.getElementById('message');
+
+    heart.addEventListener('click', () => {
+      heart.classList.toggle('enlarged');
+      if (heart.classList.contains('enlarged')) {
+        message.classList.add('show');
+      } else {
+        message.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
