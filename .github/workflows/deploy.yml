@@ -1,4 +1,3 @@
-
 name: Deploy to Elastic Beanstalk
 
 on:
@@ -9,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: production  # <-- اختياري: إذا كنت تستخدم Environment باسم production
 
     steps:
       - name: Checkout code
@@ -20,10 +20,15 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          if [ -f package.json ]; then
+            npm install
+          else
+            echo "No package.json found, skipping npm install"
+          fi
 
       - name: Zip project files
-        run: zip -r app.zip . -x '*.git*'
+        run: zip -r app.zip . -x '*.git*' 'node_modules/*' '.github/*'
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v20
